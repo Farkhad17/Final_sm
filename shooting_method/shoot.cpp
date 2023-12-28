@@ -3,11 +3,10 @@
 #include <math.h>
 #include <string>
 
-double shoot(double ksi, std::vector<double> &x_n, std::vector<double> &y_n){
-	int n, i, default_value = 0;	
+double shoot(double ksi, std::vector<double> &x_n, std::vector<double> &y_n, int n){
+	int i, default_value = 0;	
 	double h, z_1, y_1;
-	
-	n = 11;
+
 	h = 1.0/(n - 1);
 	std::vector <double> x(n, default_value);
 	std::vector <double> y(n, default_value);
