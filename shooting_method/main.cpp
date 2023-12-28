@@ -6,8 +6,7 @@
 #include "shoot.cpp"
 #include "f.cpp"
 
-int n = 11;
-std::vector <double> u(n, 0);
+std::vector <double> u;
 
 TEST(matrixTests,values){
 	std::vector<double> testVec = {{2.0}, {2.02657}, {2.05253}, {2.07671}, {2.09741}, {2.11241}, {2.11906}, {2.11437}, {2.09516}, {2.05811}, {2.0}};
@@ -18,13 +17,15 @@ TEST(matrixTests,values){
 }
 
 int main(int argc, char* argv[]){
-	int i, default_value = 0;
+	
+	int i, n, default_value = 0;
 	double ksi1, ksi2, h;
 	
 	try{
 		ksi1 = std::stod(argv[1]);
 		ksi2 = std::stod(argv[2]);
 		h = std::stod(argv[3]);
+		n = std::stod(argv[4]);;
 	}
 	catch(...){
 		std::cout << "Not able to parse arguments" << std::endl;
@@ -36,11 +37,11 @@ int main(int argc, char* argv[]){
 	double ksi, min_ksi, min_shoot;
 	
 	min_ksi = ksi1;	
-	min_shoot = shoot(min_ksi, x, y);
+	min_shoot = shoot(min_ksi, x, y, n);
 	
 	for(ksi = ksi1; ksi < ksi2; ksi +=h){
-		if(fabs(min_shoot) > fabs(shoot(ksi, x, y))){
-			min_shoot = shoot(ksi, x, y);
+		if(fabs(min_shoot) > fabs(shoot(ksi, x, y, n))){
+			min_shoot = shoot(ksi, x, y, n);
 			min_ksi = ksi;
 		}
 		//std::cout << "ksi = " << ksi << " shoot = " << shoot(ksi) << std::endl;
@@ -52,7 +53,7 @@ int main(int argc, char* argv[]){
 		return 0;
 	}
 	
-	shoot(min_ksi, x, y);
+	shoot(min_ksi, x, y, n);
 	
 	std::cout << "ksi = " << min_ksi << " pogreshnost = " << fabs(min_shoot) << std::endl << std::endl;
 	
