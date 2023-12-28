@@ -35,3 +35,4 @@ double shoot(double ksi, std::vector<double> &x_n, std::vector<double> &y_n, int
 	
 	return y[n-1] - 2.0;
 }
+
